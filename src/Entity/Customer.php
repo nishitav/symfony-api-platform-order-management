@@ -3,13 +3,24 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CustomerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['customers:read']],
+    // operations:[
+    //     new GetCollection(
+    //         uriTemplate: '/customer/getdetails',
+    //         normalizationContext: ['groups' => ['customers:read:get']],
+    //     ),
+    // ]
+)]
 class Customer
 {
     #[ORM\Id]
@@ -18,6 +29,9 @@ class Customer
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups([
+        'customers:read'
+    ])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
