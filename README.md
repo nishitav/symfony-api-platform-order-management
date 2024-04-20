@@ -44,7 +44,7 @@ You will have a token
 
 ![alt text](image-3.png)
 
-Copy that token and add in to Authrize window and then close popup
+Copy that token and add in to Authorize window and then close popup.
 
 ![alt text](image-4.png)
 
